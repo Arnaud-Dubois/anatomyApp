@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.anatomyStudy" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.phonegap.anatomyStudy" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>anatomyStudy</name>
     <description>
         Anatomy Study sample application that helps you better understanding the muscles of the arm in 3D.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="arnaud.dubois.work@gmail.com" href="https://github.com/Arnaud-Dubois/">
+        Arnaud-Dubois
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
