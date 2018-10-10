@@ -49,6 +49,8 @@ var app = {
         console.log("Error locking the orientation :: " + errMsg);
         });
         
+        // Navigator splashscreen
+        navigator.splashscreen.show();
 
 
         // Starting THREE.JS CODE here
@@ -56,12 +58,14 @@ var app = {
         // Scene
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        camera.position.x = 1;
-        camera.position.y = 6;
-        camera.position.z = 6;
+        camera.position.x = 0;
+        camera.position.y = 2;
+        camera.position.z = 3;
 
         // Meshs
         var material = new THREE.MeshNormalMaterial({wireframe: false, side: THREE.DoubleSide} );
+
+        var baseMaterial = new THREE.MeshBasicMaterial({ color:0x2979ff, wireframe: false, side: THREE.DoubleSide} );
 
         // Custom Model
 
@@ -87,7 +91,8 @@ var app = {
                     element.material = material;
                 });
 
-
+                gltf.scene.children[7].material = baseMaterial;
+                
                 gltfExport = gltf.scene.children[0];
 
                 renderer.render( scene, camera );
@@ -117,6 +122,9 @@ var app = {
             showExtensorSupinator.addEventListener('click', showElement);
             showFlexorPronator.addEventListener('click', showElement);
             showDeltoid.addEventListener('click', showElement);
+
+            // Deactivate Splashscreen
+            navigator.splashscreen.hide();
 
             function showElement() {
                 console.log(event.target.id);

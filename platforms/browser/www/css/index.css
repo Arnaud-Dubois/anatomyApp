@@ -123,6 +123,7 @@ CUSTOM
 
 .box__controls {
     position: fixed;
+    margin-top:10px;
     /* 
     Push the menu on top
     */
