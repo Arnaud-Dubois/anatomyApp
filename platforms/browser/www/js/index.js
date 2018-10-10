@@ -33,6 +33,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        
     },
     // deviceready Event Handler
     //
@@ -41,8 +42,14 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-
+        // Lock Device orientation on portrait (the cordova plugin is deprecated)
+        screen.orientation.lock('portrait').then(function success() {
+        console.log("Successfully locked the orientation");
+        },function error(errMsg) {
+        console.log("Error locking the orientation :: " + errMsg);
+        });
         
+
 
         // Starting THREE.JS CODE here
 
@@ -115,13 +122,24 @@ var app = {
                 console.log(event.target.id);
                 muscleId = event.target.id;
 
+                btnTarget = event.target;
+
+                // Show or Hide the Muscle on the mesh
                 function toggleVisibility(i) {
                     if (gltf.scene.children[i].visible === true) {
                         gltf.scene.children[i].visible = false;
+                        // Add disable class on the button
+                        //showBiceps.classList.add("disabled");
+                        btnTarget.style.background = '#333';
+                        btnTarget.style.color = '#777';
                     } else {
                         gltf.scene.children[i].visible = true;
+                        btnTarget.style.background = '#2979ff';
+                        btnTarget.style.color = '#fff';
                     }
                 }
+
+                
 
                 switch(muscleId) {
                     

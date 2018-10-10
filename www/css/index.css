@@ -113,3 +113,46 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+
+
+
+/* 
+CUSTOM
+*/
+
+.box__controls {
+    position: fixed;
+    /* 
+    Push the menu on top
+    */
+    z-index: 1111;
+}
+
+/* 
+CSS HACKS
+*/
+.button--material{
+    margin: 5px!important;
+}
+
+.page--material__content h1 {
+    color: white;
+}
+
+.page--material__background {
+    background-color: #2d2d2d!important;
+}
+
+canvas {
+    border-top:1px solid #3f3f3f;
+    position: fixed;
+}
+
+/* 
+DISABLE CLASS FOR DISABLED BUTTON
+*/
+
+.disabled {
+    background-color: darkgrey;
+}

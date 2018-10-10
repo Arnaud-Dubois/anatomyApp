@@ -8,7 +8,7 @@
     </feature>
     <name>anatomyStudy</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Anatomy Study sample application that helps you better understanding the muscles of the arm in 3D.
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
