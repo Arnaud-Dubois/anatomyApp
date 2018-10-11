@@ -16,16 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-
-
 var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-
-        // Prevent scrolling on everything
-
     },
     // Bind Event Listeners
     //
@@ -33,7 +27,6 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        
     },
     // deviceready Event Handler
     //
@@ -49,30 +42,26 @@ var app = {
         console.log("Error locking the orientation :: " + errMsg);
         });
         
-        // Navigator splashscreen
+        // Show Navigator splashscreen
         navigator.splashscreen.show();
 
-
-        // Starting THREE.JS CODE here
-
-        // Scene
+        // STARTING THREE.JS CODE HERE
+        //
+        // Creating the Scene and the camera
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
         camera.position.x = 0;
         camera.position.y = 2;
         camera.position.z = 3;
 
-        // Meshs
+        // Creating Normal and Base materials
         var material = new THREE.MeshNormalMaterial({wireframe: false, side: THREE.DoubleSide} );
-
         var baseMaterial = new THREE.MeshBasicMaterial({ color:0x2979ff, wireframe: false, side: THREE.DoubleSide} );
 
-        // Custom Model
-
+        // Custom Model imported from Blender
+        //
         // Instantiate a loader
         var loader = new THREE.GLTFLoader();
-
-
 
         // Load a glTF resource
         loader.load(
@@ -80,31 +69,22 @@ var app = {
         'res/exports/armGroup.gltf',
         // called when the resource is loaded
             function ( gltf ) {
-                console.log(gltf.scene.children)
                 scene.add( gltf.scene );
 
-                gltf.scene.children[1].material.emissive.r = 0.25;
-                
-
-                // Setting Normal Shader on all the parts of the mesh
+                // Setting Normal Shader on all the parts(muscles) of the Model
                 gltf.scene.children.forEach(element => {
                     element.material = material;
                 });
 
                 gltf.scene.children[7].material = baseMaterial;
-                
-                gltfExport = gltf.scene.children[0];
-
                 renderer.render( scene, camera );
             
-            /* ///////////////////////////////////////////////////////////////////////
+            /*
+            **************************************************************************
+            CONTROLS START
+            **************************************************************************
+            */
 
-                                        CONTROLS
-
-            */ ///////////////////////////////////////////////////////////////////////
-
-            var showMuscles = document.getElementById('controls--muscles');
-            var showBones = document.getElementById('controls--bones');
             // Muscles variables
             var showBiceps = document.getElementById('controls--biceps');
             var showTriceps = document.getElementById('controls--triceps');
@@ -112,9 +92,7 @@ var app = {
             var showExtensorSupinator = document.getElementById('controls--extensorSupinator');
             var showFlexorPronator = document.getElementById('controls--flexorPronator');
             var showDeltoid = document.getElementById('controls--deltoid');
-            
-            // showMuscles.addEventListener('click', toggleMuscles);
-            // showBones.addEventListener('click', toggleBones);
+
             // Muscles events
             showBiceps.addEventListener('click', showElement);
             showTriceps.addEventListener('click', showElement);
@@ -123,79 +101,62 @@ var app = {
             showFlexorPronator.addEventListener('click', showElement);
             showDeltoid.addEventListener('click', showElement);
 
-            // Deactivate Splashscreen
-            navigator.splashscreen.hide();
-
             function showElement() {
-                console.log(event.target.id);
                 muscleId = event.target.id;
-
                 btnTarget = event.target;
 
                 // Show or Hide the Muscle on the mesh
                 function toggleVisibility(i) {
                     if (gltf.scene.children[i].visible === true) {
                         gltf.scene.children[i].visible = false;
-                        // Add disable class on the button
-                        //showBiceps.classList.add("disabled");
+                        // Disable Style for buttons
                         btnTarget.style.background = '#333';
                         btnTarget.style.color = '#777';
                     } else {
                         gltf.scene.children[i].visible = true;
+                        // Enable Style for buttons
                         btnTarget.style.background = '#2979ff';
                         btnTarget.style.color = '#fff';
                     }
                 }
-
                 
-
-                switch(muscleId) {
-                    
+                // Switch for the muscles parts
+                switch(muscleId) {   
                     case 'controls--biceps':
                         console.log(gltf.scene.children[5]);
                         toggleVisibility(5);
-                        break;
+                    break;
                     case 'controls--deltoid':
                         console.log(gltf.scene.children[4]);
                         toggleVisibility(4);
-                        break;
+                    break;
                     case 'controls--triceps':
                         console.log(gltf.scene.children[3]);
                         toggleVisibility(3);
-                        break;
+                    break;
                     case 'controls--brachialis':
                         console.log(gltf.scene.children[2]);
                         toggleVisibility(2);
-                        break;
+                    break;
                     case 'controls--extensorSupinator':
                         console.log(gltf.scene.children[1]);
                         toggleVisibility(1);
-                        break;
+                    break;
                     case 'controls--flexorPronator':
                         console.log(gltf.scene.children[0]);
                         toggleVisibility(0);
-                        break;
+                    break;
                     default:
                         console.log('null');
                 }
             }
-
-
-            // TOGGLE VISIBILITY
-            
-
-
-            function toggleMuscles() {
-                if (gltf.scene.children[1].visible === true) {
-                    gltf.scene.children[1].visible = false;
-                } else {
-                    gltf.scene.children[1].visible = true;
-                }
-            }
-
-
-            // CONTROLS END
-
+            /*
+            **************************************************************************
+            CONTROLS END
+            **************************************************************************
+            */
+            // Deactivate Splashscreen
+            navigator.splashscreen.hide();
             },
             
         );
@@ -213,28 +174,16 @@ var app = {
         // Renderer
         var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize( window.innerWidth, window.innerHeight );
-        // document.body.appendChild( renderer.domElement );
         var canvas = document.getElementById('canvasBox');
         canvas.appendChild( renderer.domElement );
 
+        // Controls
         var controls = new THREE.OrbitControls( camera );
         renderer.render( scene, camera );
-
-
-
 
         // Rendering
         function animate() {
             requestAnimationFrame( animate );
-            
-            // Animating the cube
-            // cube.rotation.x += 0.01;
-            // cube.rotation.y += 0.01;
-
-            // cube.position.x += 0.001;
-            // cube.position.y += 0.001;
-            // cube.position.z += 0.002;
-            // controls.update();
             renderer.render( scene, camera );
         }
         animate();
@@ -244,15 +193,6 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-
         console.log('Received Event: ' + id);
-
-        
     }
 };

@@ -20,84 +20,66 @@
     under the License.
 -->
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+        <!-- Good default declaration:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+            * Enable eval(): add 'unsafe-eval' to default-src
+        * Create your own at http://cspisawesome.com
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+        
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <!-- OnsenUI sources -->
+        <link rel="stylesheet" href="css/onsenui.css">
+        <link rel="stylesheet" href="css/onsen-css-components.min.css">
+        <script src="js/onsenui.min.js"></script>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-
-
-
-
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-
-    <!-- OnsenUI sources -->
-    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-
-    <title>Anatomy Study App</title>
-
-
-
-
-</head>
-
-<body>
-    <div class="app" >
-        <h1>PhoneGap</h1>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
-    </div>
-
-    <!-- Onsen template and navigator -->
-    <ons-navigator  swipeable id="myNavigator" page="page1.html"></ons-navigator>
-    <template id="page1.html" >
-        <ons-page id="page1">
-            <h1>Anatomy of the arm</h1>
+        <title>Anatomy Study App</title>
+    </head>
     
-            <div class="box__controls">
-                <!-- <button id="controls--muscles">Show Muscles</button>
-                <button id="controls--bones" >Show Bones</button> -->
-    
-                <ons-button id="controls--biceps" >Biceps</ons-button>
-                <ons-button id="controls--triceps" >Triceps</ons-button>
-                <ons-button id="controls--brachialis" >Brachialis</ons-button>
-                <ons-button id="controls--extensorSupinator" >Extensor Supinator</ons-button>
-                <ons-button id="controls--flexorPronator" >Flexor Pronator</ons-button>
-                <ons-button id="controls--deltoid" >Deltoid</ons-button>
-            </div>
+    <body>
+        <!-- App -->
+        <div class="app" ></div>
 
-            <div id="canvasBox"></div>
-        </ons-page>
-    </template>
-    
-    <!-- THREE scripts -->
-    <script src="js/three.js"></script>
-    <script src="js/loaders/GLTFLoader.js"></script>
-    <script src="js/loaders/OBJLoader.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    
-    <!-- Cordova scripts -->
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-</body>
+        <!-- Onsen template and navigator -->
+        <ons-navigator  swipeable id="myNavigator" page="page1.html"></ons-navigator>
+        <template id="page1.html" >
+            <ons-page id="page1">
+                <h1>Anatomy of the arm</h1>
+                <div class="box__controls">
+                    <ons-button id="controls--biceps" >Biceps</ons-button>
+                    <ons-button id="controls--triceps" >Triceps</ons-button>
+                    <ons-button id="controls--brachialis" >Brachialis</ons-button>
+                    <ons-button id="controls--extensorSupinator" >Extensor Supinator</ons-button>
+                    <ons-button id="controls--flexorPronator" >Flexor Pronator</ons-button>
+                    <ons-button id="controls--deltoid" >Deltoid</ons-button>
+                </div>
+                <!-- Anchor for the 3D canvas" -->
+                <div id="canvasBox"></div>
+            </ons-page>
+        </template>
+        
+        <!-- THREE scripts -->
+        <script src="js/three.js"></script>
+        <script src="js/loaders/GLTFLoader.js"></script>
+        <script src="js/loaders/OBJLoader.js"></script>
+        <script src="js/OrbitControls.js"></script>
+        
+        <!-- Cordova scripts -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
 
 </html>

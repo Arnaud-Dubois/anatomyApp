@@ -78,49 +78,12 @@ h1 {
     text-align:center;
 }
 
-.event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
-}
 
-.event.listening {
-    background-color:#333333;
-    display:block;
-}
-
-.event.received {
-    background-color:#4B946A;
-    display:none;
-}
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-@-webkit-keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
-}
- 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
-}
-
-
-
-
-/* 
-CUSTOM
+/*
+**************************************************************************
+CUSTOM STYLING FOR THE ANATOMY APP
+**************************************************************************
 */
-
 .box__controls {
     position: fixed;
     margin-top:10px;
@@ -130,9 +93,7 @@ CUSTOM
     z-index: 1111;
 }
 
-/* 
-CSS HACKS
-*/
+/* CSS HACKS */
 .button--material{
     margin: 5px!important;
 }
@@ -144,16 +105,7 @@ CSS HACKS
 .page--material__background {
     background-color: #2d2d2d!important;
 }
-
 canvas {
     border-top:1px solid #3f3f3f;
     position: fixed;
-}
-
-/* 
-DISABLE CLASS FOR DISABLED BUTTON
-*/
-
-.disabled {
-    background-color: darkgrey;
 }
